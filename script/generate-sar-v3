@@ -1,0 +1,53 @@
+#!/bin/bash
+#### Script to generate file sar ######
+#Version Of Sysstat
+###*** this script is to make list of systat have been downloaded and stored in home user directory ***###
+# List sysstat.rpm
+SYSSTAT="$(ls ~/sysstat > ~/sysstat/list.txt)";
+
+###*** this script is to extract file ***###
+# Make Directory for extract .tar.xz or .tar.bz2
+makedir=$(mkdir hasil_extract);
+# Show the dir name
+listdir=$(ls | grep hasil);
+#execution to extract */var/log/sa, */installed-rpms, */sos_commands/rpm
+#or you can extract the file that you need with add the */file_that_you_need
+for s in `ls | grep .tar`; do 
+tar -C "$listdir" --wildcards -vxf $s */var/log/sa */installed-rpms */sos_commands/rpm; done
+
+#Check list of sosreport directory
+for x in `ls $listdir`; do
+
+#Check Version Of Sysstat In Sosreport File
+CHECK="$(cat $listdir/$x/installed-rpms | grep syss | awk '{print $1}')";
+
+#Let's do that
+if grep "$CHECK" ~/sysstat/list.txt
+then
+	for i in `ls -tr $listdir/$x/var/log/sa/sa*`; do LC_ALL=C ~/sysstat/$CHECK/usr/bin/sar -A -f $i >> $listdir/$x/merge-v3.txt; done
+elif grep "$CHECK" ~/sysstat/list.txt
+then
+	for i in `ls -tr $listdir/$x/var/log/sa/sa*`; do LC_ALL=C ~/sysstat/$CHECK/usr/bin/sar -A -f $i >> $listdir/$x/merge-v3.txt; done
+elif grep "$CHECK" ~/sysstat/list.txt
+then
+	for i in `ls -tr $listdir/$x/var/log/sa/sa*`; do LC_ALL=C ~/sysstat/$CHECK/usr/bin/sar -A -f $i >> $listdir/$x/merge-v3.txt; done
+elif grep "$CHECK" ~/sysstat/list.txt
+then
+	for i in `ls -tr $listdir/$x/var/log/sa/sa*`; do LC_ALL=C ~/sysstat/$CHECK/usr/bin/sar -A -f $i >> $listdir/$x/merge-v3.txt; done
+elif grep "$CHECK" ~/sysstat/list.txt
+then
+	for i in `ls -tr $listdir/$x/var/log/sa/sa*`; do LC_ALL=C ~/sysstat/$CHECK/usr/bin/sar -A -f $i >> $listdir/$x/merge-v3.txt; done
+elif grep "$CHECK" ~/sysstat/list.txt
+then
+	for i in `ls -tr $listdir/$x/var/log/sa/sa*`; do LC_ALL=C ~/sysstat/$CHECK/usr/bin/sar -A -f $i >> $listdir/$x/merge-v3.txt; done
+elif grep "$CHECK" ~/sysstat/list.txt
+then
+	for i in `ls -tr $listdir/$x/var/log/sa/sa*`; do LC_ALL=C ~/sysstat/$CHECK/usr/bin/sar -A -f $i >> $listdir/$x/merge-v3.txt; done
+elif grep "$CHECK" ~/sysstat/list.txt
+then
+	for i in `ls -tr $listdir/$x/var/log/sa/sa*`; do LC_ALL=C ~/sysstat/$CHECK/usr/bin/sar -A -f $i >> $listdir/$x/merge-v3.txt; done
+fi
+
+
+done
+
